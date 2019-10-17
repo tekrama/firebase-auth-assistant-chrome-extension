@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "See and copy the information saved by Firebase Authentication JavaScript library for the actual page.",
   "author": "Tekrama",
-  "permissions": ["activeTab", "tabs"],
+  "permissions": ["activeTab", "tabs", "storage"],
   "background": {
     "scripts": ["src/background.js"],
     "persistent": false
@@ -20,6 +20,10 @@
       "48": "src/assets/images/firebase48.png",
       "128": "src/assets/images/firebase128.png"
     }
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": false
   },
   "icons": {
     "16": "src/assets/images/firebase16.png",

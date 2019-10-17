@@ -2,20 +2,17 @@
 
 chrome.tabs.onUpdated.addListener(
     function(tabId, changeInfo, tab) {
-        chrome.pageAction.show(tabId);
-        const dbRequest = indexedDB.open('firebaseLocalStorageDb', 1);
-        
-        dbRequest.onsuccess = () => {
-            const db = dbRequest.result;
-            try {
-                db.transaction(['firebaseLocalStorage'], 'readonly');
+        if (changeInfo.status == 'complete') {
+            chrome.storage.sync.get({
+                urlPatterns: ''
+            }, function(items) {
+                const urlPatterns = items.urlPatterns.replace(/ /g, '').replace(/\n+/g, '').split(',');
 
-            } catch (e) {
-                chrome.pageAction.hide(tabId);
-            }
-        }
-
-        dbRequest.onupgradeneeded = function (e) {
-            e.target.transaction.abort();
+                urlPatterns.forEach(urlPattern => {
+                    if (tab.url.match(urlPattern)){
+                        chrome.pageAction.show(tabId);
+                    }
+                });
+            });
         }
     });
