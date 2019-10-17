@@ -10,7 +10,9 @@ chrome.tabs.onUpdated.addListener(
 
                 urlPatterns.forEach(urlPattern => {
                     if (tab.url.match(urlPattern)){
-                        chrome.pageAction.show(tabId);
+                        chrome.tabs.executeScript(tabId, { file: 'src/content.js' }, function() {
+                            chrome.pageAction.show(tabId);
+                        });
                     }
                 });
             });
