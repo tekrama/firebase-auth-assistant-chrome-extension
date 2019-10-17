@@ -1,0 +1,13 @@
+.url-patterns-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.status-message {
+    height: 2em;
+}
+
+.note {
+    color: silver;
+    font-size: 0.75em;
+}

@@ -3,23 +3,24 @@
   "version": "0.1.0",
   "description": "See and copy the information saved by Firebase Authentication JavaScript library for the actual page.",
   "author": "Tekrama",
-  "permissions": ["activeTab", "tabs"],
+  "homepage_url": "https://github.com/tekrama/firebase-auth-assistant-chrome-extension",
+  "permissions": ["activeTab", "tabs", "storage", "http://*/", "https://*/"],
   "background": {
     "scripts": ["src/background.js"],
     "persistent": false
   },
-  "content_scripts": [{
-    "matches": ["*://*/*"],
-    "js": ["src/content.js"]
-  }],
   "page_action": {
-    "default_popup": "src/popup.html",
+    "default_popup": "src/popup/popup.html",
     "default_icon": {
       "16": "src/assets/images/firebase16.png",
       "32": "src/assets/images/firebase32.png",
       "48": "src/assets/images/firebase48.png",
       "128": "src/assets/images/firebase128.png"
     }
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": false
   },
   "icons": {
     "16": "src/assets/images/firebase16.png",
