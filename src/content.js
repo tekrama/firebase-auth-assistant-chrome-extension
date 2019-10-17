@@ -9,7 +9,10 @@ chrome.runtime.onMessage.addListener(
                 const store = transaction.objectStore('firebaseLocalStorage');
                 const getCursorRequest = store.openCursor();
                 getCursorRequest.onsuccess = e => {
-                    const token = e.target.result.value.value.stsTokenManager.accessToken;
+                    let token = '';
+                    if (e.target.result) {
+                        token = e.target.result.value.value.stsTokenManager.accessToken;
+                    }
                     sendResponse({ token: token });
                 }
             }
