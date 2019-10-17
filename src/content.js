@@ -5,15 +5,19 @@ chrome.runtime.onMessage.addListener(
     
             dbRequest.onsuccess = () => {
                 const db = dbRequest.result;
-                const transaction = db.transaction(['firebaseLocalStorage'], 'readonly');
-                const store = transaction.objectStore('firebaseLocalStorage');
-                const getCursorRequest = store.openCursor();
-                getCursorRequest.onsuccess = e => {
-                    let token = '';
-                    if (e.target.result) {
-                        token = e.target.result.value.value.stsTokenManager.accessToken;
+                try {
+                    const transaction = db.transaction(['firebaseLocalStorage'], 'readonly');
+                    const store = transaction.objectStore('firebaseLocalStorage');
+                    const getCursorRequest = store.openCursor();
+                    getCursorRequest.onsuccess = e => {
+                        let token = '';
+                        if (e.target.result) {
+                            token = e.target.result.value.value.stsTokenManager.accessToken;
+                        }
+                        sendResponse({ token: token });
                     }
-                    sendResponse({ token: token });
+                } catch (e) {
+                    sendResponse({ token: '' });
                 }
             }
 
