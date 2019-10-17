@@ -11,3 +11,8 @@
     color: silver;
     font-size: 0.75em;
 }
+
+.warning {
+    color: red;
+    font-size: 0.75em;
+}
